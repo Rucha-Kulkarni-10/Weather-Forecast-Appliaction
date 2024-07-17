@@ -13,12 +13,12 @@
 </head>
 <body class="bg-gray-100 h-screen flex flex-col items-center justify-center"> 
     <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
-        <h1 class="text-3xl font-bold mb-4 text-center">Weather Forecast</h1>
+        <h1 class="text-3xl font-bold mb-4 text-center" style="color: rgb(117, 232, 199); font-weight: bolder; text-shadow: 1px 1px 2px black;">Weather Forecast</h1>
 
         <form id="searchForm" class="mb-4">
             <div class="flex items-center border-gray-300 py-2">
                 <input id="locationdata" type="text" placeholder="Enter city name..." class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none">
-                <button type="submit" class="flex-shrink-0 bg-blue-500 hover:bg-blue-700 border-blue-500 hover:border-blue-700 text-sm border-4 text-white py-1 px-2 rounded">Search</button>
+                <button type="submit"  class="flex-shrink-0 bg-blue-500 hover:bg-gray-400 border-blue-500 text-sm border-4 text-white hover:text-black py-1 px-2 rounded" >Search</button>
             </div>
         </form>
 
@@ -39,6 +39,13 @@
         </div>
     </div>
 
+    <!--div for 5-days forcast -->
+    <div id="extendedForecast" class="mt-8">
+        <h2 class="text-2xl font-bold mb-4" style="color: rgb(117, 232, 199); font-weight: bolder; text-shadow: 1px 1px 2px black;">5-Day Forecast</h2>
+        <div id="forecastdiv" class="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-5">
+            <!-- Forecast of 5 days added here -->
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

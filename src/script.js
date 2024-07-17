@@ -105,3 +105,86 @@ recentCitiesDropdown.addEventListener('change', async function() {
         }
     }
 });
+
+
+// Function to fetch 5-days forecast data
+async function fetchExtendedForecast(city) {
+    try {
+        const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?q=${city}&key=${apiKey}&days=5&aqi=no`);
+        
+        if (!response.ok) {
+            throw new Error('Extended forecast data not available. Please check your location and try again.');
+        }
+        
+        const data = await response.json();
+        
+        if (data.error) {
+            throw new Error(data.error.message);
+        }
+        
+        return data;
+    } catch (error) {
+        console.error('Error fetching extended forecast data:', error.message);
+        return null;
+    }
+}
+
+// Function to update forecast
+function updateExtendedForecastUI(forecastData) {
+    if (!forecastData) {
+        document.getElementById('extendedForecast').innerHTML = '<p class="text-red-500">Data is not available..Try Again..</p>';
+        return;
+    }
+
+    const { forecast } = forecastData;
+    const forecastdiv = document.getElementById('forecastdiv');
+    forecastdiv.innerHTML = '';
+
+    forecast.forecastday.forEach(day => {
+        const date = day.date;
+        const icon = day.day.condition.icon;
+        const temp = day.day.avgtemp_c;
+        const wind = day.day.maxwind_kph;
+        const humidity = day.day.avghumidity;
+
+        const forecastCard = `
+            <div class="bg-white rounded-lg shadow-lg p-4">
+                <h3 class="font-bold">${date}</h3>
+                <img src="${icon}" alt="Weather Icon">
+                <p>Temp: ${temp} °C</p>
+                <p>Wind: ${wind} km/h</p>
+                <p>Humidity: ${humidity} %</p>
+            </div>
+        `;
+        forecastdiv.innerHTML += forecastCard;
+    });
+}
+
+//event listener for form submission to fetch extended forecast
+searchForm.addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const city = locationdata.value.trim();
+    if (city) {
+        const weatherData = await fetchWeather(city);
+        const extendedForecastData = await fetchExtendedForecast(city);
+
+        if (weatherData && extendedForecastData) {
+            updateWeatherUI(weatherData);
+            updateExtendedForecastUI(extendedForecastData);
+            
+            // Add city to recent cities
+            let recentCities = JSON.parse(localStorage.getItem('recentCities')) || [];
+            recentCities = recentCities.filter(recentCity => recentCity !== city);
+            recentCities.unshift(city);
+            localStorage.setItem('recentCities', JSON.stringify(recentCities));
+
+            updateRecentCitiesDropdown(recentCities);
+        } else {
+            showWeather.innerHTML = '<p class="text-red-500">Error while fetching weather data.. Please try again after some Time..</p>';
+        }
+    } else {
+        showWeather.innerHTML = '<p class="text-red-500">Please Enter a city name.</p>';
+    }
+});
+
