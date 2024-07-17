@@ -1,4 +1,4 @@
-https://github.com/Rucha-Kulkarni-10/Weather-Forecast-Appliaction.git
+// https://github.com/Rucha-Kulkarni-10/Weather-Forecast-Appliaction.git
 const apiKey = 'bcc989e840d74b78949135826241607';
 
 const searchForm = document.getElementById('searchForm');
