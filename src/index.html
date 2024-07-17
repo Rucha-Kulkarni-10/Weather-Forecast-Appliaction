@@ -7,9 +7,39 @@
     <meta name="keywords" content="weather, forecast, humidity, weather app">
 
     <title>Weather-Forecast-Appliaction</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="./output.css" rel="stylesheet">
 </head>
-<body>
-    
+<body class="bg-gray-100 h-screen flex flex-col items-center justify-center"> 
+    <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold mb-4 text-center">Weather Forecast</h1>
+
+        <form id="searchForm" class="mb-4">
+            <div class="flex items-center border-gray-300 py-2">
+                <input id="locationdata" type="text" placeholder="Enter city name..." class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none">
+                <button type="submit" class="flex-shrink-0 bg-blue-500 hover:bg-blue-700 border-blue-500 hover:border-blue-700 text-sm border-4 text-white py-1 px-2 rounded">Search</button>
+            </div>
+        </form>
+
+        <div id="showWeather" class="text-center">
+        </div>
+
+        <!-- Searched Cities Dropdown -->
+        <div id="recentCities" class="mt-4">
+            <label for="recentCitiesDropdown" class="block text-sm font-medium text-gray-700">Recently Searched:</label>
+            <div class="relative">
+                <select id="recentCitiesDropdown" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="">Select a city</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
 </body>
 </html>
