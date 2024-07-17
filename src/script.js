@@ -188,3 +188,65 @@ searchForm.addEventListener('submit', async function(event) {
     }
 });
 
+
+// Function to fetch weather data based on geolocation
+async function fetchWeatherByGeolocation(latitude, longitude) {
+    try {
+        const response = await fetch(`http://api.weatherapi.com/v1/current.json?q=${latitude},${longitude}&key=${apiKey}&aqi=no`);
+
+        if (!response.ok) {
+            throw new Error('Weather data not available. Please check your location and try again.');
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.error.message);
+        }
+
+        return data;
+    } catch (error) {
+        console.error('Error fetching weather data:', error.message);
+        return null;
+    }
+}
+
+// Function to get current location coordinates
+function getCurrentLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async function(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            const weatherData = await fetchWeatherByGeolocation(latitude, longitude);
+            const extendedForecastData = await fetchExtendedForecast(`${latitude},${longitude}`);
+
+            if (weatherData && extendedForecastData) {
+                updateWeatherUI(weatherData);
+                updateExtendedForecastUI(extendedForecastData);
+
+                // Add current location to recent cities
+                const currentLocation = 'Current Location';
+                let recentCities = JSON.parse(localStorage.getItem('recentCities')) || [];
+                recentCities = recentCities.filter(recentCity => recentCity !== currentLocation);
+                recentCities.unshift(currentLocation);
+                localStorage.setItem('recentCities', JSON.stringify(recentCities));
+
+                updateRecentCitiesDropdown(recentCities);
+            } else {
+                showWeather.innerHTML = '<p class="text-red-500">Error fetching weather data or extended forecast. Please try again later.</p>';
+            }
+        }, function(error) {
+            console.error('Error getting location:', error.message);
+            showWeather.innerHTML = '<p class="text-red-500">Geolocation permission denied. Please enter city name manually.</p>';
+        });
+    } else {
+        showWeather.innerHTML = '<p class="text-red-500">Geolocation is not supported by your browser. Please enter a city name manually.</p>';
+    }
+}
+
+const currentLocationBtn = document.getElementById('currentLocationBtn');
+
+currentLocationBtn.addEventListener('click', function() {
+    getCurrentLocation();
+});
