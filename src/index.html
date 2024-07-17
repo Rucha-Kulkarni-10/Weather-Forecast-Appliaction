@@ -6,19 +6,19 @@
     <meta name="author" content="Rucha">
     <meta name="keywords" content="weather, forecast, humidity, weather app">
 
-    <title>Weather-Forecast-Appliaction</title>
-
+    <title>Weather Forecast Application</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="./output.css" rel="stylesheet">
+    <link rel="stylesheet" href="output.css"> 
 </head>
-<body class="bg-gray-100 h-screen flex flex-col items-center justify-center"> 
-    <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
-        <h1 class="text-3xl font-bold mb-4 text-center" style="color: rgb(117, 232, 199); font-weight: bolder; text-shadow: 1px 1px 2px black;">Weather Forecast</h1>
+<body class="bg-gray-100 h-screen flex flex-col items-center justify-center-lg mb-32">
+    <header style="color: rgb(117, 232, 199); font-weight: bolder; text-shadow: 1px 1px 2px black; font-size:xx-large; background-color: brown; width: 100%; text-align: center; padding-bottom: 10px;">Weather Forecast Application</header>
+       <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-lg xl:mt-8 sm:mt-6">
+        <h1 class="text-3xl font-bold mb-4 text-center" style="color: rgb(117, 232, 199); font-weight: bolder; text-shadow: 1px 1px 2px black;">Check Weather Here..!!</h1>
 
         <form id="searchForm" class="mb-4">
             <div class="flex items-center border-gray-300 py-2">
                 <input id="locationdata" type="text" placeholder="Enter city name..." class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none">
-                <button type="submit"  class="flex-shrink-0 bg-blue-500 hover:bg-gray-400 border-blue-500 text-sm border-4 text-white hover:text-black py-1 px-2 rounded" >Search</button>
+                <button type="submit" class="flex-shrink-0 bg-blue-500 hover:bg-gray-400 border-blue-500 text-sm border-4 text-white hover:text-black py-1 px-2 rounded" >Search</button>
             </div>
         </form>
 
@@ -44,14 +44,15 @@
     </button>
 
 
-    <!--div for 5-days forcast -->
     <div id="extendedForecast" class="mt-8">
         <h2 class="text-2xl font-bold mb-4" style="color: rgb(117, 232, 199); font-weight: bolder; text-shadow: 1px 1px 2px black;">5-Day Forecast</h2>
-        <div id="forecastdiv" class="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-5">
+        <div id="forecastdiv" class="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-5 mb-16">
             <!-- Forecast of 5 days added here -->
         </div>
     </div>
+    
 
+    <!-- JavaScript to fetch weather data -->
     <script src="script.js"></script>
 </body>
 </html>
