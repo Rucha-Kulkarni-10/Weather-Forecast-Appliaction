@@ -10,47 +10,48 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="output.css"> 
 </head>
-<body class="bg-gray-100 h-screen flex flex-col items-center justify-center-lg mb-32">
-    <header style="color: rgb(117, 232, 199); font-weight: bolder; text-shadow: 1px 1px 2px black; font-size:xx-large; background-color: brown; width: 100%; text-align: center; padding-bottom: 10px;">Weather Forecast Application</header>
-       <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-lg xl:mt-8 sm:mt-6">
-        <h1 class="text-3xl font-bold mb-4 text-center" style="color: rgb(117, 232, 199); font-weight: bolder; text-shadow: 1px 1px 2px black;">Check Weather Here..!!</h1>
+<body class="bg-gray-100 h-screen flex flex-col items-center p-4">
+    <header class="bg-brown text-light-teal font-bold text-4xl text-center py-6 w-full shadow-lg rounded-b-md">
+        Weather Forecast Application
+    </header>
 
-        <form id="searchForm" class="mb-4">
-            <div class="flex items-center border-gray-300 py-2">
-                <input id="locationdata" type="text" placeholder="Enter city name..." class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none">
-                <button type="submit" class="flex-shrink-0 bg-blue-500 hover:bg-gray-400 border-blue-500 text-sm border-4 text-white hover:text-black py-1 px-2 rounded" >Search</button>
-            </div>
-        </form>
-
-        <div id="showWeather" class="text-center">
-        </div>
-
-        <!-- Searched Cities Dropdown -->
-        <div id="recentCities" class="mt-4">
-            <label for="recentCitiesDropdown" class="block text-sm font-medium text-gray-700">Recently Searched:</label>
-            <div class="relative">
-                <select id="recentCitiesDropdown" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                    <option value="">Select a city</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/></svg>
+    <main class="max-w-6xl w-full mt-6 flex flex-col lg:flex-row gap-8">
+        <!-- Current Weather -->
+        <div class="bg-white rounded-lg shadow-lg p-6 flex-1">
+            <h1 class="text-2xl font-semibold mb-6 text-center text-light-teal">Current Weather</h1>
+            <form id="searchForm" class="mb-6">
+                <div class="flex items-center border border-gray-300 rounded-md">
+                    <input id="locationdata" type="text" placeholder="Enter city name..." class="flex-1 bg-gray-100 border-none text-gray-700 py-2 px-4 rounded-l-md focus:outline-none">
+                    <button type="submit" class="bg-blue-500 border-2 border-transparent hover:border-black hover:text-black text-white hover:bg-blue-300 py-2 px-4 rounded-r-md transition-colors duration-300">
+                        Search
+                    </button>
+                </div>
+            </form>
+            <div id="showWeather" class="text-center mb-6"></div>
+            <div id="recentCities" class="mb-6">
+                <label for="recentCitiesDropdown" class="block text-sm font-medium text-gray-700 mb-2">Recently Searched:</label>
+                <div class="relative">
+                    <select id="recentCitiesDropdown" class="block w-full bg-white border border-gray-300 rounded-md py-2 px-4 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select a city</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/></svg>
+                    </div>
                 </div>
             </div>
+            <button id="currentLocationBtn" class="bg-blue-500 border-2 border-transparent hover:border-black hover:text-black text-white hover:bg-blue-300 py-2 px-4 rounded-md shadow-md w-full transition-colors duration-300">
+                Use Current Location
+            </button>
         </div>
-    </div>
 
-    <button id="currentLocationBtn" class="flex-shrink-0 bg-blue-500 hover:bg-gray-400 border-blue-500 text-sm border-4 text-white hover:text-black py-1 px-2 rounded">
-        Use Current Location
-    </button>
-
-
-    <div id="extendedForecast" class="mt-8">
-        <h2 class="text-2xl font-bold mb-4" style="color: rgb(117, 232, 199); font-weight: bolder; text-shadow: 1px 1px 2px black;">5-Day Forecast</h2>
-        <div id="forecastdiv" class="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-5 mb-16">
-            <!-- Forecast of 5 days added here -->
+        <!-- 5-Day Forecast -->
+        <div id="extendedForecast" class="bg-white rounded-lg shadow-lg p-6 flex-1">
+            <h2 class="text-2xl font-semibold mb-6 text-center text-light-teal">5-Day Forecast</h2>
+            <div id="forecastdiv" class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
+                <!-- Forecast of 5 days will be added here -->
+            </div>
         </div>
-    </div>
-    
+    </main>
 
     <!-- JavaScript to fetch weather data -->
     <script src="script.js"></script>
